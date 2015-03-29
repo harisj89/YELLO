@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style type="text/css">
+      html, body, #map-canvas {
+       height: 100%; 
+       margin: 0; 
+       padding: 0;
+/*        padding-top: 50px; */
+       }
+</style>
+
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?libraries=weather,geometry&sensor=true_or_false&key=AIzaSyDBl3_6LVk0J7fgoBHWUTWktaDvIHBmltA&signed_in=true">
+</script>
+
+<script type="text/javascript">
+      function initialize() {
+    	var myLatlng = new google.maps.LatLng(42.30008,-83.01654);
+
+        var mapOptions = {
+//           center: { lat: -34.397, lng: 150.644},
+// 			 center: { lat: 42.30008, lng: -83.01654},
+			center: myLatlng,
+          zoom:4
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      
+    	 // To add the marker to the map, use the 'map' property
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+//             map: map,
+            title:"Marker Test"
+        });  
+        
+    	 marker.setMap(map);
+    	 
+    	 //For Removing Marker
+//     	 marker.setMap(null);
+    	 
+    	 //Adding routes to map
+//     	 var transitLayer = new google.maps.TransitLayer();
+//     	 transitLayer.setMap(map);
+
+    	 var weatherLayer = new google.maps.weather.WeatherLayer();
+    	 weatherLayer.setMap(map);
+    	 
+    	 var cloudLayer = new google.maps.weather.CloudLayer();
+    	  cloudLayer.setMap(map);
+
+    	  
+    	  google.maps.event.addListener(weatherLayer, 'click', function(e) {
+//     		  alert('The current temperature at ' + e.featureDetails.location + ' is '
+//     		        + e.featureDetails.current.temperature + ' degrees.');
+    		});
+    	  
+//     	  var dist = calcDistance();
+//     	  alert(dist);
+// alert("hello");
+      }
+      
+      
+	  //calculates distance between two points in km's
+// 	  function calcDistance(){
+// 		  var p1 = new google.maps.LatLng(45.463688, 9.18814);
+// 		  var p2 = new google.maps.LatLng(46.0438317, 9.75936230000002);
+
+// 	    return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+// 	  }
+      
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+<div id="map-canvas" style="width: 100%; height: 70%"></div>
+</body>
+</html>
